@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --terminal-bg: #1a1d23;
+    --terminal-text: #e4e6eb;
+    --terminal-cyan: #00d9ff;
+    --terminal-green: #00ff85;
+  }
+
+  * {
+    @apply border-terminal-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-terminal-bg text-terminal-text font-mono antialiased;
+    @apply transition-colors duration-300;
+  }
+
+  body.light {
+    @apply bg-light-bg text-light-text;
+  }
+}
+
+@layer components {
+  /* Terminal cursor */
+  .terminal-cursor {
+    @apply inline-block w-2 h-5 bg-terminal-cyan animate-cursor-blink ml-1;
+  }
+
+  /* Terminal prompt */
+  .terminal-prompt {
+    @apply text-terminal-prompt font-semibold;
+  }
+
+  /* Terminal command */
+  .terminal-command {
+    @apply text-terminal-command;
+  }
+
+  /* Terminal output */
+  .terminal-output {
+    @apply text-terminal-text;
+  }
+
+  /* Scrollbar styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-terminal-bg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-terminal-border rounded;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-cyan;
+  }
+
+  /* Link styling */
+  .terminal-link {
+    @apply text-terminal-cyan hover:text-terminal-cyanDark underline-offset-4 hover:underline transition-colors;
+  }
+
+  /* Button styling */
+  .terminal-button {
+    @apply px-4 py-2 bg-terminal-bgLight border border-terminal-border rounded;
+    @apply hover:border-terminal-cyan hover:text-terminal-cyan transition-all duration-200;
+    @apply active:scale-95;
+  }
+
+  /* Card styling */
+  .terminal-card {
+    @apply bg-terminal-bgLight border border-terminal-border rounded-lg p-6;
+    @apply hover:border-terminal-cyan transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-terminal-cyan to-terminal-green bg-clip-text text-transparent;
+  }
+
+  /* Glow effect */
+  .glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  }
+
+  .glow-green {
+    text-shadow: 0 0 10px rgba(0, 255, 133, 0.5);
+  }
+}
+
+/* Selection color */
+::selection {
+  @apply bg-terminal-cyan text-terminal-bg;
+}
+
+::-moz-selection {
+  @apply bg-terminal-cyan text-terminal-bg;
+}

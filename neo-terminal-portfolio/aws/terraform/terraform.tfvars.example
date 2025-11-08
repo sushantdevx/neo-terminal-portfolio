@@ -1,0 +1,13 @@
+# AWS Configuration
+aws_region = "us-east-1"
+environment = "production"
+
+# Domain Configuration
+domain_name = "yourdomain.dev"
+
+# Optional: Route53 Hosted Zone ID (leave empty if managing DNS elsewhere)
+hosted_zone_id = ""
+
+# Example values:
+# domain_name = "portfolio.dev"
+# hosted_zone_id = "Z1234567890ABC"
