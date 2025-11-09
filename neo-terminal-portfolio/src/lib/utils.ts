@@ -108,19 +108,29 @@ export function getGreeting(): string {
 }
 
 /**
- * Generate breadcrumb path from pathname
+ * Generate breadcrumbs from pathname
  */
-export function generateBreadcrumbs(pathname: string) {
+export function generateBreadcrumbs(pathname: string): Array<{
+  label: string;
+  href: string;
+  current: boolean;
+}> {
   const paths = pathname.split('/').filter(Boolean);
+  
   return paths.map((path, index) => {
     const href = '/' + paths.slice(0, index + 1).join('/');
-    const label = path.charAt(0).toUpperCase() + path.slice(1);
-    return { label, href, current: index === paths.length - 1 };
+    const label = path
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    const current = index === paths.length - 1;
+    
+    return { label, href, current };
   });
 }
 
 /**
- * Class name utility for conditional classes
+ * Utility function for merging class names
  */
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ');
