@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Timeline from '@/components/Timeline';
+import Skills from '@/components/Skills';
+import ResumeDownload from '@/components/ResumeDownload';
 import { siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -10,7 +13,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Breadcrumbs */}
         <Breadcrumbs className="mb-8" />
 
@@ -32,7 +35,7 @@ export default function AboutPage() {
         </div>
 
         {/* About Content */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Bio Section */}
           <div className="terminal-card animate-slide-up">
             <div className="space-y-4">
@@ -40,46 +43,71 @@ export default function AboutPage() {
                 <span className="text-terminal-prompt mr-2">›</span>
                 Bio
               </h2>
-              <div className="pl-6 space-y-3 text-terminal-text">
+              <div className="pl-6 space-y-4 text-terminal-text">
+                <p className="text-lg">
+                  Hello! I'm <span className="text-terminal-cyan font-semibold">{siteConfig.author.name}</span>, 
+                  a passionate full-stack developer focused on building innovative solutions and learning new technologies.
+                </p>
                 <p>
-                  Hello! I'm {siteConfig.author.name}, a passionate developer focused on building
-                  innovative solutions and learning new technologies.
+                  With expertise in modern web technologies, I specialize in creating scalable, performant applications 
+                  that solve real-world problems. My journey in software development has taken me through various domains, 
+                  from building responsive frontends to architecting robust backend systems.
                 </p>
                 <p className="text-terminal-textMuted">
-                  This portfolio showcases my journey in software development, featuring articles,
-                  projects, and insights from my experiences in the tech industry.
+                  I believe in writing clean, maintainable code and following best practices. When I'm not coding, 
+                  you'll find me exploring new technologies, contributing to open source, or sharing knowledge with the community.
                 </p>
+                
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
+                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center">
+                    <div className="text-2xl font-bold text-terminal-cyan">4+</div>
+                    <div className="text-xs text-terminal-textMuted mt-1">Years Experience</div>
+                  </div>
+                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center">
+                    <div className="text-2xl font-bold text-terminal-green">50+</div>
+                    <div className="text-xs text-terminal-textMuted mt-1">Projects Built</div>
+                  </div>
+                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center">
+                    <div className="text-2xl font-bold text-terminal-command">15+</div>
+                    <div className="text-xs text-terminal-textMuted mt-1">Technologies</div>
+                  </div>
+                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center">
+                    <div className="text-2xl font-bold text-terminal-cyan">∞</div>
+                    <div className="text-xs text-terminal-textMuted mt-1">Learning</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Tech Stack - Coming Soon */}
+          {/* Skills Section */}
           <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-terminal-cyan flex items-center">
                 <span className="text-terminal-prompt mr-2">›</span>
-                Tech Stack
+                Skills & Technologies
               </h2>
-              <div className="pl-6 text-terminal-textMuted">
-                <p>Full tech stack and skills visualization coming in Iteration 4!</p>
+              <div className="pl-6">
+                <Skills />
               </div>
             </div>
           </div>
 
-          {/* Timeline - Coming Soon */}
+          {/* Timeline Section */}
           <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-terminal-cyan flex items-center">
                 <span className="text-terminal-prompt mr-2">›</span>
-                Timeline
+                Career Timeline
               </h2>
-              <div className="pl-6 text-terminal-textMuted">
-                <p>Interactive timeline with terminal aesthetics coming in Iteration 4!</p>
+              <div className="pl-6">
+                <Timeline />
               </div>
             </div>
           </div>
 
-          {/* Resume Download - Coming Soon */}
+          {/* Resume Download Section */}
           <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-terminal-cyan flex items-center">
@@ -87,16 +115,34 @@ export default function AboutPage() {
                 Resume
               </h2>
               <div className="pl-6">
-                <p className="text-terminal-textMuted mb-4">
-                  Downloadable resume will be available in Iteration 4.
-                </p>
-                <button
-                  className="terminal-button cursor-not-allowed opacity-50"
-                  disabled
+                <ResumeDownload />
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="terminal-card bg-terminal-bg animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            <div className="text-center space-y-4 py-8">
+              <h3 className="text-2xl font-bold text-gradient">Let's Work Together!</h3>
+              <p className="text-terminal-textMuted max-w-2xl mx-auto">
+                I'm always interested in hearing about new projects and opportunities. 
+                Whether you have a question or just want to say hi, feel free to reach out!
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center pt-4">
+                <a
+                  href="/contact"
+                  className="terminal-button hover:scale-105 transition-transform"
                 >
                   <span className="text-terminal-prompt mr-2">❯</span>
-                  Download Resume (Coming Soon)
-                </button>
+                  Get In Touch
+                </a>
+                <a
+                  href="/projects"
+                  className="terminal-button hover:scale-105 transition-transform"
+                >
+                  <span className="text-terminal-prompt mr-2">❯</span>
+                  View Projects
+                </a>
               </div>
             </div>
           </div>
