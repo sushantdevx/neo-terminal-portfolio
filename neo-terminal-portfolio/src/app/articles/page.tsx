@@ -1,12 +1,21 @@
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import ArticlesListClient from './ArticlesListClient';
+import { getAllArticles, getAllTags } from '@/lib/mdx';
 
 export const metadata: Metadata = {
   title: 'Articles',
-  description: 'Technical articles and blog posts',
+  description: 'Technical articles, tutorials, and insights on software development',
+  openGraph: {
+    title: 'Articles | Neo-Terminal Portfolio',
+    description: 'Technical articles, tutorials, and insights on software development',
+  },
 };
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const articles = await getAllArticles();
+  const tags = await getAllTags();
+
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -17,37 +26,50 @@ export default function ArticlesPage() {
         <div className="terminal-card mb-8 animate-fade-in">
           <div className="space-y-2">
             <p className="text-terminal-textMuted">
-              <span className="terminal-prompt">❯</span> cd /articles
+              <span className="terminal-prompt">¯</span> cd /articles
             </p>
             <div className="pl-4">
               <h1 className="text-4xl font-bold text-gradient mb-2">
                 Articles
               </h1>
               <p className="text-terminal-textMuted">
-                Technical writings and insights<span className="terminal-cursor"></span>
+                Technical writings, tutorials, and insights
+                <span className="terminal-cursor"></span>
               </p>
             </div>
           </div>
         </div>
 
-        {/* Articles List - Coming Soon */}
-        <div className="terminal-card animate-slide-up">
-          <div className="text-center py-12">
-            <div className="inline-block p-4 bg-terminal-bg rounded-lg mb-4">
-              <span className="text-4xl">📝</span>
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="terminal-card text-center animate-slide-up">
+            <div className="text-2xl font-bold text-terminal-cyan">
+              {articles.length}
             </div>
-            <h2 className="text-2xl font-bold text-terminal-cyan mb-2">
-              Coming Soon
-            </h2>
-            <p className="text-terminal-textMuted max-w-md mx-auto">
-              Articles will be available after implementing the blog system in Iteration 5.
-              Stay tuned for technical content and insights!
-            </p>
-            <div className="mt-6 text-terminal-textMuted text-sm">
-              <p className="terminal-prompt inline">❯</p> Current status: In development...
+            <div className="text-xs text-terminal-textMuted mt-1">Total Articles</div>
+          </div>
+          <div className="terminal-card text-center animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <div className="text-2xl font-bold text-terminal-green">
+              {articles.filter(a => a.featured).length}
             </div>
+            <div className="text-xs text-terminal-textMuted mt-1">Featured</div>
+          </div>
+          <div className="terminal-card text-center animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="text-2xl font-bold text-terminal-command">
+              {tags.length}
+            </div>
+            <div className="text-xs text-terminal-textMuted mt-1">Topics</div>
+          </div>
+          <div className="terminal-card text-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <div className="text-2xl font-bold text-terminal-cyan">
+              {Math.ceil(articles.reduce((acc, a) => acc + a.readTime, 0))}
+            </div>
+            <div className="text-xs text-terminal-textMuted mt-1">Min Read Time</div>
           </div>
         </div>
+
+        {/* Articles List with Client-side Filtering */}
+        <ArticlesListClient articles={articles} allTags={tags} />
       </div>
     </div>
   );

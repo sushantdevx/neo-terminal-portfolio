@@ -1,0 +1,329 @@
+---
+title: "Deploying Next.js Applications to AWS: A Complete Guide"
+description: "Step-by-step guide to deploying Next.js static sites to AWS using S3, CloudFront, and CI/CD pipelines"
+publishedAt: "2025-01-05"
+tags: ["aws", "nextjs", "deployment", "devops", "cloudfront"]
+featured: false
+---
+
+## Why AWS for Next.js?
+
+AWS offers a robust, scalable infrastructure for hosting Next.js applications. When using static export, you can leverage S3 and CloudFront for a cost-effective, high-performance deployment.
+
+## Architecture Overview
+
+```
+Next.js Build → S3 Bucket → CloudFront CDN → Route 53 (DNS)
+                    ↑
+              GitHub Actions (CI/CD)
+```
+
+## Prerequisites
+
+- AWS Account
+- Domain name (optional)
+- Next.js project configured for static export
+- GitHub repository
+
+## Step 1: Configure Next.js for Static Export
+
+Update your `next.config.js`:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
+};
+
+module.exports = nextConfig;
+```
+
+## Step 2: Create S3 Bucket
+
+```bash
+# Using AWS CLI
+aws s3 mb s3://my-nextjs-app --region us-east-1
+
+# Enable static website hosting
+aws s3 website s3://my-nextjs-app \
+  --index-document index.html \
+  --error-document 404.html
+```
+
+## Step 3: Set Up CloudFront Distribution
+
+Create a CloudFront distribution to serve your S3 content with HTTPS:
+
+```json
+{
+  "DistributionConfig": {
+    "Origins": [
+      {
+        "DomainName": "my-nextjs-app.s3.amazonaws.com",
+        "Id": "S3Origin",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": ""
+        }
+      }
+    ],
+    "DefaultCacheBehavior": {
+      "TargetOriginId": "S3Origin",
+      "ViewerProtocolPolicy": "redirect-to-https",
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+    },
+    "Enabled": true
+  }
+}
+```
+
+## Step 4: Configure Route 53 (Optional)
+
+Point your domain to CloudFront:
+
+```bash
+# Create hosted zone
+aws route53 create-hosted-zone --name example.com
+
+# Create alias record
+aws route53 change-resource-record-sets \
+  --hosted-zone-id ZXXXXXXXXXXXX \
+  --change-batch file://alias-record.json
+```
+
+## Step 5: Set Up SSL Certificate
+
+Request a certificate via AWS Certificate Manager (ACM):
+
+```bash
+aws acm request-certificate \
+  --domain-name example.com \
+  --subject-alternative-names "*.example.com" \
+  --validation-method DNS \
+  --region us-east-1
+```
+
+## Step 6: Create IAM User for Deployment
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::my-nextjs-app",
+        "arn:aws:s3:::my-nextjs-app/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudfront:CreateInvalidation"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+## Step 7: GitHub Actions CI/CD
+
+Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+      
+      - name: Deploy to S3
+        run: |
+          aws s3 sync out/ s3://my-nextjs-app \
+            --delete \
+            --cache-control max-age=31536000,public
+      
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_ID }} \
+            --paths "/*"
+```
+
+## Step 8: Set Up OIDC for GitHub Actions
+
+This is more secure than using access keys:
+
+```bash
+# Create OIDC provider
+aws iam create-open-id-connect-provider \
+  --url https://token.actions.githubusercontent.com \
+  --client-id-list sts.amazonaws.com
+
+# Create role with trust policy
+aws iam create-role \
+  --role-name GitHubActionsRole \
+  --assume-role-policy-document file://trust-policy.json
+```
+
+Trust policy (`trust-policy.json`):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+          "token.actions.githubusercontent.com:sub": "repo:username/repo:ref:refs/heads/main"
+        }
+      }
+    }
+  ]
+}
+```
+
+## Performance Optimization
+
+### Cache Headers
+
+Set appropriate cache headers for different file types:
+
+```bash
+# HTML files - short cache
+aws s3 cp out/ s3://my-nextjs-app \
+  --exclude "*" \
+  --include "*.html" \
+  --recursive \
+  --cache-control "max-age=300,public"
+
+# Static assets - long cache
+aws s3 cp out/ s3://my-nextjs-app \
+  --exclude "*" \
+  --include "*.js" --include "*.css" \
+  --recursive \
+  --cache-control "max-age=31536000,immutable,public"
+```
+
+### Compression
+
+Enable Brotli and Gzip compression in CloudFront:
+
+- Automatic compression for text files
+- Reduced bandwidth costs
+- Faster load times
+
+## Cost Optimization
+
+**Typical monthly costs for small-medium traffic:**
+
+- S3 Storage: $0.50 - $2
+- CloudFront: $1 - $10
+- Route 53: $0.50
+- Data Transfer: $1 - $5
+
+**Total: ~$3-18/month**
+
+### Tips to Reduce Costs:
+
+1. Enable CloudFront caching
+2. Use proper cache headers
+3. Optimize images before upload
+4. Enable compression
+5. Use S3 Intelligent-Tiering for storage
+
+## Monitoring
+
+Set up CloudWatch alarms:
+
+```bash
+# Monitor 4xx errors
+aws cloudwatch put-metric-alarm \
+  --alarm-name high-4xx-rate \
+  --alarm-description "Alert on high 4xx error rate" \
+  --metric-name 4xxErrorRate \
+  --namespace AWS/CloudFront \
+  --statistic Average \
+  --period 300 \
+  --threshold 5 \
+  --comparison-operator GreaterThanThreshold
+```
+
+## Security Best Practices
+
+1. **Use HTTPS only** - Configure CloudFront to redirect HTTP to HTTPS
+2. **Implement security headers** - Use CloudFront Functions or Lambda@Edge
+3. **Enable WAF** - Protect against common web attacks
+4. **Restrict S3 access** - Use CloudFront Origin Access Identity
+5. **Regular security audits** - Use AWS Security Hub
+
+## Rollback Strategy
+
+Keep previous deployments for easy rollback:
+
+```bash
+# Tag deployments
+aws s3 cp out/ s3://my-nextjs-app-backup/v1.0.0/ --recursive
+
+# Rollback if needed
+aws s3 sync s3://my-nextjs-app-backup/v1.0.0/ s3://my-nextjs-app/ \
+  --delete
+```
+
+## Conclusion
+
+Deploying Next.js to AWS provides a scalable, cost-effective solution for static sites. With proper configuration and automation, you can achieve excellent performance and reliability.
+
+## Next Steps
+
+- Implement monitoring and alerting
+- Set up staging environment
+- Add E2E tests to CI/CD
+- Configure custom error pages
+- Implement A/B testing with CloudFront
+
+## Resources
+
+- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/)
+- [CloudFront Developer Guide](https://docs.aws.amazon.com/cloudfront/)
+- [Next.js Static Export](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
