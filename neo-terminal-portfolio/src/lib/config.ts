@@ -5,7 +5,7 @@ export const siteConfig: SiteConfig = {
   description: "Developer-focused portfolio with terminal aesthetics",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   author: {
-    name: "Sushant",
+    name: "Sushant Kumar",
     email: "sushantkct@gmail.com",
     github: "https://github.com/SK9712",
     linkedin: "https://www.linkedin.com/in/sk9712",

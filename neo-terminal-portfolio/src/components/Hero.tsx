@@ -20,7 +20,7 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-terminal-success hover:opacity-80 transition-opacity cursor-pointer"></div>
           </div>
           <span className="text-terminal-textMuted text-sm ml-2">
-            sushant@dev:~
+            sushantkumar@dev:~
           </span>
         </div>
 

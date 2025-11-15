@@ -117,8 +117,12 @@ export default function GitHubActivity({ username, className = '' }: GitHubActiv
     
     switch (event.type) {
       case 'PushEvent':
-        const commits = event.payload?.commits?.length || 0;
-        return `Pushed ${commits} commit${commits !== 1 ? 's' : ''} to ${repoName}`;
+        const commits = event.payload?.commits?.length;
+        if (commits && commits > 0) {
+          return `Pushed ${commits} commit${commits !== 1 ? 's' : ''} to ${repoName}`;
+        }
+        // If commit count is unavailable or 0, show generic message
+        return `Pushed to ${repoName}`;
       case 'CreateEvent':
         return `Created ${event.payload?.ref_type} in ${repoName}`;
       case 'PullRequestEvent':
@@ -143,7 +147,7 @@ export default function GitHubActivity({ username, className = '' }: GitHubActiv
       case 'PullRequestEvent':
         return '🔀';
       case 'IssuesEvent':
-        return '❗';
+        return '◉';
       case 'WatchEvent':
         return '⭐';
       case 'ForkEvent':
@@ -278,30 +282,6 @@ export default function GitHubActivity({ username, className = '' }: GitHubActiv
             </div>
           </div>
         )}
-
-        {/* Contribution Streak Placeholder */}
-        <div className="terminal-card bg-terminal-bg">
-          <div className="space-y-2">
-            <h4 className="text-terminal-cyan text-sm font-semibold flex items-center gap-2">
-              <span>🔥</span>
-              Contribution Streak
-            </h4>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-2xl font-bold text-terminal-green">
-                  {Math.floor(Math.random() * 100) + 50}
-                </p>
-                <p className="text-xs text-terminal-textMuted">Days active</p>
-              </div>
-              <div className="text-right">
-                <p className="text-lg font-semibold text-terminal-cyan">
-                  {Math.floor(Math.random() * 500) + 200}
-                </p>
-                <p className="text-xs text-terminal-textMuted">This year</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Terminal Output Style */}
         <div className="terminal-card bg-terminal-bg">
