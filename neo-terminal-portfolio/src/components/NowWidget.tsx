@@ -47,7 +47,7 @@ export default function NowWidget({ className = '' }: NowWidgetProps) {
   const status = {
     emoji: '🚀',
     text: 'Building Neo-Terminal Portfolio',
-    location: 'Kollam, Kerala, IN',
+    location: 'Trivandrum, Kerala, IN',
     availability: 'Available for opportunities',
   };
 
@@ -76,13 +76,13 @@ export default function NowWidget({ className = '' }: NowWidgetProps) {
           </div>
 
           {/* Current Status */}
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <p className="text-terminal-textMuted text-xs">Currently</p>
             <p className="text-terminal-text flex items-center gap-2">
               <span className="text-lg">{status.emoji}</span>
               {status.text}
             </p>
-          </div>
+          </div> */}
 
           {/* Location */}
           <div className="space-y-1">
@@ -94,20 +94,20 @@ export default function NowWidget({ className = '' }: NowWidgetProps) {
           </div>
 
           {/* Availability */}
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <p className="text-terminal-textMuted text-xs">Status</p>
             <p className="text-terminal-green flex items-center gap-2">
               <span className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></span>
               {status.availability}
             </p>
-          </div>
+          </div> */}
 
           {/* System Info */}
           <div className="pt-2 border-t border-terminal-border space-y-1">
-            <div className="flex justify-between text-xs">
+            {/* <div className="flex justify-between text-xs">
               <span className="text-terminal-textMuted">Iteration</span>
               <span className="text-terminal-cyan">3/12</span>
-            </div>
+            </div> */}
             <div className="flex justify-between text-xs">
               <span className="text-terminal-textMuted">Uptime</span>
               <span className="text-terminal-text">99.9%</span>

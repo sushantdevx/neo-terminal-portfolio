@@ -20,22 +20,22 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-terminal-success hover:opacity-80 transition-opacity cursor-pointer"></div>
           </div>
           <span className="text-terminal-textMuted text-sm ml-2">
-            sushant@neo-terminal:~
+            sushant@dev:~
           </span>
         </div>
 
         {/* Command Execution */}
         <div className="space-y-3">
           <p className="text-terminal-textMuted">
-            <span className="terminal-prompt">❯</span> ./welcome.sh
+            <span className="terminal-prompt">¯</span> ./welcome.sh
           </p>
 
           {/* Output */}
           <div className="pl-4 space-y-4">
-            {/* Welcome Message */}
-            <div className="space-y-2">
+            {/* Welcome Message - SEO Optimized */}
+            <div className="space-y-3">
               <Typewriter
-                text="Welcome to Neo-Terminal"
+                text="Hi, I'm Sushant Kumar — Full-Stack Developer"
                 speed={40}
                 className="text-2xl md:text-4xl font-bold text-gradient block"
                 onComplete={() => setShowSubtitle(true)}
@@ -43,7 +43,7 @@ export default function Hero() {
               
               {showSubtitle && (
                 <Typewriter
-                  text={siteConfig.description}
+                  text="Building scalable web applications with Next.js, TypeScript, and AWS cloud infrastructure"
                   speed={30}
                   delay={200}
                   className="text-terminal-textMuted text-lg block"
@@ -52,34 +52,72 @@ export default function Hero() {
               )}
             </div>
 
-            {/* System Info */}
+            {/* Value Proposition */}
             {showButtons && (
-              <div className="space-y-2 animate-fade-in">
-                <p className="text-terminal-success flex items-center gap-2">
-                  <span className="w-2 h-2 bg-terminal-success rounded-full animate-pulse"></span>
-                  System operational
-                </p>
-                
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-terminal-cyan">›</span>
-                    <span className="text-terminal-textMuted">Version:</span>
-                    <span className="text-terminal-text">{siteConfig.version}</span>
+              <div className="space-y-4 animate-fade-in">
+                <div className="space-y-2">
+                  <p className="text-terminal-text leading-relaxed">
+                    Specializing in modern web development, cloud architecture, and DevOps practices. 
+                    Passionate about creating performant, user-centric applications that solve real-world problems.
+                  </p>
+                </div>
+
+                {/* System Info - Technical Stack */}
+                <div className="space-y-2">
+                  <p className="text-terminal-success flex items-center gap-2">
+                    <span className="w-2 h-2 bg-terminal-success rounded-full animate-pulse"></span>
+                    Available for opportunities
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-terminal-cyan">›</span>
+                      <span className="text-terminal-textMuted">Expertise:</span>
+                      <span className="text-terminal-text">Full-Stack</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-terminal-cyan">›</span>
+                      <span className="text-terminal-textMuted">Focus:</span>
+                      <span className="text-terminal-green">Web Apps</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-terminal-cyan">›</span>
+                      <span className="text-terminal-textMuted">Stack:</span>
+                      <span className="text-terminal-text">React/Next.js</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-terminal-cyan">›</span>
+                      <span className="text-terminal-textMuted">Cloud:</span>
+                      <span className="text-terminal-cyan">AWS Certified</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-terminal-cyan">›</span>
-                    <span className="text-terminal-textMuted">Status:</span>
-                    <span className="text-terminal-green">Live</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-terminal-cyan">›</span>
-                    <span className="text-terminal-textMuted">Framework:</span>
-                    <span className="text-terminal-text">Next.js 14</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-terminal-cyan">›</span>
-                    <span className="text-terminal-textMuted">Theme:</span>
-                    <span className="text-terminal-cyan">Neo-Terminal</span>
+                </div>
+
+                {/* Key Highlights */}
+                <div className="terminal-card bg-terminal-bg">
+                  <div className="space-y-2 text-sm">
+                    <p className="text-terminal-cyan font-semibold flex items-center gap-2">
+                      <span>💡</span>
+                      What I Bring to the Table
+                    </p>
+                    <ul className="space-y-1 pl-6">
+                      <li className="flex items-start gap-2 text-terminal-text">
+                        <span className="text-terminal-green">✓</span>
+                        <span>4+ years building production-ready applications</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-terminal-text">
+                        <span className="text-terminal-green">✓</span>
+                        <span>Expert in TypeScript, React, Node.js ecosystem</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-terminal-text">
+                        <span className="text-terminal-green">✓</span>
+                        <span>AWS infrastructure & serverless architecture</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-terminal-text">
+                        <span className="text-terminal-green">✓</span>
+                        <span>CI/CD, testing, and DevOps best practices</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -91,12 +129,13 @@ export default function Hero() {
         {showButtons && (
           <div className="pt-4 border-t border-terminal-border animate-slide-up">
             <p className="text-terminal-textMuted mb-3">
-              <span className="terminal-prompt">❯</span> Quick navigation:
+              <span className="terminal-prompt">¯</span> Explore my work:
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pl-4">
               <Link
                 href="/articles"
                 className="terminal-button text-center hover:scale-105 transition-transform"
+                aria-label="Read technical articles and tutorials"
               >
                 <span className="text-terminal-prompt mr-1">›</span>
                 Articles
@@ -104,6 +143,7 @@ export default function Hero() {
               <Link
                 href="/projects"
                 className="terminal-button text-center hover:scale-105 transition-transform"
+                aria-label="View portfolio projects"
               >
                 <span className="text-terminal-prompt mr-1">›</span>
                 Projects
@@ -111,6 +151,7 @@ export default function Hero() {
               <Link
                 href="/about"
                 className="terminal-button text-center hover:scale-105 transition-transform"
+                aria-label="Learn more about my experience"
               >
                 <span className="text-terminal-prompt mr-1">›</span>
                 About
@@ -118,6 +159,7 @@ export default function Hero() {
               <Link
                 href="/contact"
                 className="terminal-button text-center hover:scale-105 transition-transform"
+                aria-label="Get in touch for collaboration"
               >
                 <span className="text-terminal-prompt mr-1">›</span>
                 Contact
@@ -129,9 +171,9 @@ export default function Hero() {
         {/* Command Prompt */}
         <div className="pt-4 border-t border-terminal-border">
           <p className="text-terminal-textMuted flex items-center">
-            <span className="terminal-prompt">❯</span>
+            <span className="terminal-prompt">¯</span>
             <span className="ml-2 text-terminal-text">
-              Type 'help' for available commands
+              Ready to collaborate on your next project
             </span>
             <span className="terminal-cursor"></span>
           </p>

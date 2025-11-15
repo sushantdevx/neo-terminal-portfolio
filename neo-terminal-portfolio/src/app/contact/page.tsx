@@ -201,7 +201,7 @@ export default function ContactPage() {
         </div>
 
         {/* AWS Integration Info */}
-        <div className="terminal-card bg-terminal-bg mt-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        {/* <div className="terminal-card bg-terminal-bg mt-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <div className="space-y-2">
             <h3 className="text-terminal-cyan font-semibold flex items-center gap-2">
               <span>🔒</span>
@@ -228,10 +228,10 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Terminal Output */}
-        <div className="terminal-card bg-terminal-bg mt-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        {/* <div className="terminal-card bg-terminal-bg mt-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <div className="font-mono text-xs space-y-1">
             <p className="text-terminal-textMuted">
               <span className="text-terminal-prompt">¯</span> Status check...
@@ -249,7 +249,7 @@ export default function ContactPage() {
               › Ready to receive your message<span className="terminal-cursor"></span>
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -11,13 +11,13 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
-              <span className="text-terminal-prompt font-bold text-xl">❯</span>
+              <span className="text-terminal-prompt font-bold text-xl">¯</span>
               <span className="text-terminal-text font-semibold">
-                {siteConfig.name.split(' ')[0]}
+                {siteConfig.author.name}
               </span>
             </div>
             <p className="text-terminal-textMuted text-sm">
-              {siteConfig.description}
+              Full-Stack Developer specializing in modern web technologies and cloud infrastructure
             </p>
           </div>
 
@@ -96,11 +96,11 @@ export default function Footer() {
         <div className="mt-8 pt-6 border-t border-terminal-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-terminal-textMuted text-sm">
-              <span className="text-terminal-prompt">❯</span> © {currentYear}{' '}
+              <span className="text-terminal-prompt">¯</span> © {currentYear}{' '}
               {siteConfig.author.name}. All rights reserved.
             </p>
             <div className="flex items-center space-x-4 text-terminal-textMuted text-sm">
-              <span>Version: {siteConfig.version}</span>
+              <span>Built with Next.js & AWS</span>
               <span>•</span>
               <span>Updated: {siteConfig.lastUpdated}</span>
             </div>

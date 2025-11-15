@@ -5,8 +5,8 @@ import GitHubActivity from '@/components/GitHubActivity';
 
 export default function Home() {
   // Get usernames from environment variables or config
-  const mediumUsername = process.env.NEXT_PUBLIC_MEDIUM_USERNAME || 'yourusername';
-  const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'yourusername';
+  const mediumUsername = process.env.NEXT_PUBLIC_MEDIUM_USERNAME || 'SK9712';
+  const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'SK9712';
 
   return (
     <div className="min-h-screen p-4 sm:p-8">
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
 
         {/* Tech Stack Info */}
-        <div className="text-center text-terminal-textMuted text-sm animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        {/* <div className="text-center text-terminal-textMuted text-sm animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <div className="terminal-card bg-terminal-bg inline-block">
             <p className="flex items-center justify-center gap-2 flex-wrap font-mono">
               <span className="text-terminal-prompt">›</span>
@@ -128,7 +128,7 @@ export default function Home() {
               <span className="text-terminal-cyan">Neo-Terminal Theme</span>
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* System Status */}
         <div className="terminal-card bg-terminal-bg animate-fade-in" style={{ animationDelay: '0.5s' }}>

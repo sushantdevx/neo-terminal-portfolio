@@ -22,17 +22,34 @@ export default function Typewriter({
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
+  // Reset everything when text changes
   useEffect(() => {
-    if (delay > 0) {
-      const delayTimeout = setTimeout(() => {
-        setCurrentIndex(0);
-      }, delay);
-      return () => clearTimeout(delayTimeout);
+    setDisplayedText('');
+    setCurrentIndex(0);
+    setIsComplete(false);
+    setIsStarted(false);
+  }, [text]);
+
+  // Handle initial delay
+  useEffect(() => {
+    if (!isStarted) {
+      if (delay > 0) {
+        const delayTimeout = setTimeout(() => {
+          setIsStarted(true);
+        }, delay);
+        return () => clearTimeout(delayTimeout);
+      } else {
+        setIsStarted(true);
+      }
     }
-  }, [delay]);
+  }, [delay, isStarted]);
 
+  // Typewriter effect
   useEffect(() => {
+    if (!isStarted) return;
+
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
@@ -44,7 +61,7 @@ export default function Typewriter({
       setIsComplete(true);
       onComplete?.();
     }
-  }, [currentIndex, text, speed, onComplete, isComplete]);
+  }, [currentIndex, text, speed, onComplete, isComplete, isStarted]);
 
   return (
     <span className={className}>

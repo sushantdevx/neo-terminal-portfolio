@@ -33,12 +33,8 @@ export default function MediumFeed({
         setLoading(true);
         setError(null);
 
-        // Using RSS2JSON API service (free tier) to parse Medium RSS
-        // Alternative: You can create your own AWS Lambda function for RSS parsing
-        const rssUrl = `https://medium.com/feed/@${username}`;
-        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=YOUR_API_KEY&count=${maxArticles}`;
-
-        const response = await fetch(apiUrl);
+        // Call your API route that uses the server-side parser
+        const response = await fetch(`/api/medium?username=${username}&limit=${maxArticles}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch Medium articles');
@@ -46,20 +42,11 @@ export default function MediumFeed({
 
         const data = await response.json();
         
-        if (data.status !== 'ok') {
-          throw new Error(data.message || 'Failed to parse RSS feed');
+        if (data.error) {
+          throw new Error(data.error);
         }
 
-        const parsedArticles: MediumArticle[] = data.items.map((item: any) => ({
-          title: item.title,
-          link: item.link,
-          pubDate: item.pubDate,
-          description: item.description?.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
-          thumbnail: item.thumbnail,
-          categories: item.categories || [],
-        }));
-
-        setArticles(parsedArticles);
+        setArticles(data.articles || []);
       } catch (err) {
         console.error('Error fetching Medium feed:', err);
         setError(err instanceof Error ? err.message : 'Failed to load articles');
