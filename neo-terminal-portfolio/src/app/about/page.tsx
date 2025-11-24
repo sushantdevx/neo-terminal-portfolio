@@ -5,6 +5,7 @@ import Skills from '@/components/Skills';
 import ResumeDownload from '@/components/ResumeDownload';
 import { siteConfig } from '@/lib/config';
 import CodingProfiles from '@/components/CodingProfiles';
+import Certifications from '@/components/Certifications';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -154,8 +155,21 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* Certifications Section */}
+          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.175s' }}>
+            <div className="space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-terminal-cyan flex items-center">
+                <span className="text-terminal-prompt mr-2">›</span>
+                Licenses & Certifications
+              </h2>
+              <div className="pl-2 sm:pl-6">
+                <Certifications />
+              </div>
+            </div>
+          </div>
+
           {/* Timeline Section */}
-          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.225s' }}>
             <div className="space-y-4">
               <h2 className="text-xl sm:text-2xl font-bold text-terminal-cyan flex items-center">
                 <span className="text-terminal-prompt mr-2">›</span>
@@ -168,7 +182,7 @@ export default function AboutPage() {
           </div>
 
           {/* Resume Download Section */}
-          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.275s' }}>
             <div className="space-y-4">
               <h2 className="text-xl sm:text-2xl font-bold text-terminal-cyan flex items-center">
                 <span className="text-terminal-prompt mr-2">›</span>
@@ -181,7 +195,7 @@ export default function AboutPage() {
           </div>
 
           {/* Call to Action */}
-          <div className="terminal-card bg-terminal-bg animate-slide-up" style={{ animationDelay: '0.4s' }}>
+          <div className="terminal-card bg-terminal-bg animate-slide-up" style={{ animationDelay: '0.325s' }}>
             <div className="text-center space-y-4 py-6 sm:py-8 px-4">
               <h3 className="text-xl sm:text-2xl font-bold text-gradient">Let's Work Together!</h3>
               <p className="text-terminal-textMuted max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
