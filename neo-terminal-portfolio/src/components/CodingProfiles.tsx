@@ -12,8 +12,8 @@ interface CodingProfile {
 const profiles: CodingProfile[] = [
   {
     name: 'HackerRank',
-    username: 'sushantkct',
-    url: 'https://www.hackerrank.com/sushantkct',
+    username: 'lOne9wOlf',
+    url: 'https://www.hackerrank.com/lOne9wOlf',
     achievements: [
       '6-star rating in Problem Solving',
       '5-star badge in Java',
@@ -25,8 +25,8 @@ const profiles: CodingProfile[] = [
   },
   {
     name: 'LeetCode',
-    username: 'sushantkct',
-    url: 'https://leetcode.com/sushantkct',
+    username: 'sushantdevx',
+    url: 'https://leetcode.com/sushantdevx',
     achievements: [
       '278+ problems solved',
       'Regular contest participant',
@@ -36,8 +36,8 @@ const profiles: CodingProfile[] = [
   },
   {
     name: 'GitHub',
-    username: 'sushantkct',
-    url: 'https://github.com/sushantkct',
+    username: 'sushantdevx',
+    url: 'https://github.com/sushantdevx',
     achievements: [
       'Active open source contributor',
       'Multiple production-ready projects',
