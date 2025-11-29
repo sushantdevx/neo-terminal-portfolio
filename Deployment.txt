@@ -1,0 +1,7 @@
+aws login
+
+npm run build
+
+aws s3 sync out/ s3://sushantdevx-bucket --delete
+
+aws cloudfront create-invalidation --distribution-id EDTO5JUSQZ8TS --paths "/*"

@@ -33,8 +33,14 @@ export default function MediumFeed({
         setLoading(true);
         setError(null);
 
-        // Call your API route that uses the server-side parser
-        const response = await fetch(`/api/medium?username=${username}&limit=${maxArticles}`);
+        // Call Lambda function (which fetches from https://medium.com/feed/@username)
+        const apiEndpoint = "https://ipazohfwg9.execute-api.us-east-1.amazonaws.com/prod/medium";
+        
+        if (!apiEndpoint) {
+          throw new Error('MEDIUM_API_ENDPOINT not configured');
+        }
+
+        const response = await fetch(`${apiEndpoint}?username=${username}&limit=${maxArticles}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch Medium articles');
@@ -46,7 +52,22 @@ export default function MediumFeed({
           throw new Error(data.error);
         }
 
-        setArticles(data.articles || []);
+        // Clean CDATA tags from articles (Medium RSS includes these)
+        const cleanedArticles = (data.articles || []).map((article: MediumArticle) => ({
+          ...article,
+          title: article.title
+            .replace(/<!\[CDATA\[/g, '')
+            .replace(/\]\]>/g, '')
+            .trim(),
+          categories: article.categories.map((cat: string) =>
+            cat
+              .replace(/<!\[CDATA\[/g, '')
+              .replace(/\]\]>/g, '')
+              .trim()
+          ),
+        }));
+
+        setArticles(cleanedArticles);
       } catch (err) {
         console.error('Error fetching Medium feed:', err);
         setError(err instanceof Error ? err.message : 'Failed to load articles');
@@ -165,9 +186,9 @@ export default function MediumFeed({
                 </h4>
 
                 {/* Description */}
-                <p className="text-terminal-textMuted text-sm line-clamp-2">
+                {/* <p className="text-terminal-textMuted text-sm line-clamp-2">
                   {article.description}
-                </p>
+                </p> */}
 
                 {/* Meta Info */}
                 <div className="flex items-center justify-between text-xs text-terminal-textMuted pt-2 border-t border-terminal-border">
@@ -183,7 +204,7 @@ export default function MediumFeed({
                 </div>
 
                 {/* Categories */}
-                {article.categories.length > 0 && (
+                {article.categories && article.categories.length > 0 && (
                   <div className="flex flex-wrap gap-1">
                     {article.categories.slice(0, 3).map((category, idx) => (
                       <span
@@ -205,7 +226,7 @@ export default function MediumFeed({
           <div className="font-mono text-xs text-terminal-textMuted">
             <p>
               <span className="text-terminal-prompt">¯</span> Fetched {articles.length} article
-              {articles.length !== 1 ? 's' : ''} from Medium RSS feed
+              {articles.length !== 1 ? 's' : ''} from Medium
             </p>
           </div>
         </div>
