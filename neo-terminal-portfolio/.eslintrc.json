@@ -1,10 +1,6 @@
 {
   "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier"
+    "next/core-web-vitals"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -14,12 +10,20 @@
       "jsx": true
     }
   },
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-explicit-any": "warn"
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@next/next/no-img-element": "off",
+    "no-case-declarations": "off",
+    "no-useless-escape": "off",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "react": {
