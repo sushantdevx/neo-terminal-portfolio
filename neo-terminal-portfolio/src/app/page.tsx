@@ -79,7 +79,7 @@ export default async function Home() {
                 className="terminal-card bg-terminal-bg hover:border-terminal-green transition-all group hover:scale-105"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">🚀</span>
+                  <span className="text-3xl">🛠️</span>
                   <div className="flex-1">
                     <h3 className="font-semibold text-terminal-text group-hover:text-terminal-green transition-colors">
                       Projects

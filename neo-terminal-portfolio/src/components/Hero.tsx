@@ -134,7 +134,7 @@ export default function Hero() {
               >
                 <span className="text-terminal-prompt mr-1">›</span>
                 <span className="hidden xs:inline">Articles</span>
-                <span className="xs:hidden">Blog</span>
+                <span className="xs:hidden">Articles</span>
               </Link>
               <Link
                 href="/projects"
