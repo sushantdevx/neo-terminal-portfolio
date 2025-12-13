@@ -46,7 +46,7 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
-              const isActive = pathname.replace(/(?<!^)\/$/, "") === item.href;
+              const isActive = pathname.replace(/(?<!^)\/$/, "") === item.href || (item.href !== '/' && pathname.replace(/(?<!^)\/$/, "").startsWith(item.href+'/'));
               return (
                 <Link
                   key={item.href}
@@ -105,7 +105,7 @@ export default function Navigation() {
         <div className="md:hidden border-t border-terminal-border bg-terminal-bg/98 backdrop-blur-sm">
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname.replace(/(?<!^)\/$/, "") === item.href || (item.href !== '/' && pathname.replace(/(?<!^)\/$/, "").startsWith(item.href+'/'));
               return (
                 <Link
                   key={item.href}
