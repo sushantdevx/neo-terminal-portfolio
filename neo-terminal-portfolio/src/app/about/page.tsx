@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Timeline from '@/components/Timeline';
 import Skills from '@/components/Skills';
@@ -153,7 +154,7 @@ export default function AboutPage() {
               </h2>
               <div className="pl-2 sm:pl-6">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-start">
-                  {/* Profile Picture */}
+                  {/* Profile Picture - OPTIMIZED */}
                   <div className="lg:col-span-1 flex justify-center lg:justify-start">
                     <div className="relative group w-full max-w-xs">
                       {/* Decorative border effect */}
@@ -162,10 +163,21 @@ export default function AboutPage() {
                       {/* Image container */}
                       <div className="relative">
                         <div className="w-full aspect-square rounded-lg overflow-hidden border-2 border-terminal-cyan bg-terminal-bg">
-                          <img
+                          {/* OPTIMIZED: Using Next.js Image component with priority loading */}
+                          <Image
                             src="/profile.jpg"
                             alt={siteConfig.author.name}
+                            width={400}
+                            height={400}
+                            priority={true}
+                            quality={90}
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                             className="w-full h-full object-cover"
+                            sizes="(max-width: 1024px) 100vw, 400px"
+                            style={{
+                              objectFit: 'cover',
+                            }}
                           />
                         </div>
                         
@@ -173,175 +185,152 @@ export default function AboutPage() {
                         <div className="mt-3 text-center">
                           <div className="inline-flex items-center gap-2 px-3 py-1 bg-terminal-bg border border-terminal-cyan rounded text-xs font-mono">
                             <span className="w-2 h-2 bg-terminal-green rounded-full animate-pulse"></span>
-                            <span className="text-terminal-cyan">Online</span>
+                            <span className="text-terminal-text">sushant@equifax</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Bio Text */}
-                  <div className="lg:col-span-2 space-y-3 md:space-y-4 text-terminal-text text-sm sm:text-base">
+                  {/* Bio Text Content */}
+                  <div className="lg:col-span-2 space-y-4 text-terminal-text">
                     <p className="text-base sm:text-lg leading-relaxed">
-                      Hello! I'm <span className="text-terminal-cyan font-semibold">{siteConfig.author.name}</span>, 
-                      a <span className="text-terminal-green font-semibold">Software Engineer II</span> with 4+ years of experience 
-                      building enterprise-scale applications in backend development, microservices architecture, and cloud infrastructure.
+                      Hello! I'm <span className="text-terminal-cyan font-semibold">Sushant Kumar</span>, 
+                      a <span className="text-terminal-green font-semibold">Software Engineer II at Equifax</span> with 4+ years of experience 
+                      specializing in <span className="text-terminal-cyan">enterprise-scale backend development</span> and 
+                      <span className="text-terminal-cyan"> modern web applications</span>.
                     </p>
-                    <p className="leading-relaxed">
-                      Currently at <span className="text-terminal-cyan font-semibold">Equifax</span>, I work with <span className="text-terminal-green">Google Cloud Platform</span>, 
-                      developing customer onboarding automation, building internal tools with <span className="text-terminal-command">Angular</span> and <span className="text-terminal-command">TypeScript</span>, 
-                      and creating data pipelines using <span className="text-terminal-green">Apache Beam</span> and <span className="text-terminal-green">Dataflow</span>. 
-                      I also developed a custom Jenkins plugin to streamline complex build configurations across teams.
+                    
+                    <p className="text-sm sm:text-base leading-relaxed">
+                      Currently at <span className="font-semibold text-terminal-green">Equifax</span>, I work on <span className="text-terminal-cyan">microservices architecture</span>, 
+                      building scalable systems using <span className="font-semibold">Java, Spring Boot, Apache Kafka, and Google Cloud Platform</span>. 
+                      My expertise spans authentication systems (<span className="text-terminal-cyan">OAuth2, SAML</span>), 
+                      distributed data pipelines, and cloud-native applications.
                     </p>
-                    <p className="leading-relaxed">
-                      Previously at <span className="text-terminal-cyan font-semibold">Suntec Business Solutions</span>, I contributed to the <span className="text-terminal-green">Xelerate platform</span> - 
-                      an enterprise revenue management system serving global banking and financial institutions. I worked on optimizing API performance with <span className="text-terminal-command">Spring WebFlux</span> and <span className="text-terminal-command">Redis</span>, 
-                      building real-time data pipelines with <span className="text-terminal-command">Kafka</span>, implementing authentication systems with <span className="text-terminal-command">OAuth2</span> and <span className="text-terminal-command">SAML</span>, 
-                      and developing a custom DSL using <span className="text-terminal-command">ANTLR</span> for product configuration workflows.
+
+                    <p className="text-sm sm:text-base leading-relaxed">
+                      Previously, I worked at <span className="font-semibold text-terminal-green">Suntec Business Solutions</span>, 
+                      contributing to the <span className="text-terminal-cyan">Xelerate platform</span> — an enterprise revenue management system 
+                      serving major banks and financial institutions globally. I developed RESTful APIs, implemented caching strategies with Redis, 
+                      and built responsive frontends using Angular.
                     </p>
-                    <p className="leading-relaxed">
-                      I'm passionate about <span className="text-terminal-cyan">clean code</span>, <span className="text-terminal-cyan">distributed systems</span>, 
-                      and <span className="text-terminal-cyan">solving complex problems</span>. With a 6-star rating on HackerRank and 278+ problems solved on LeetCode, 
-                      I continuously sharpen my algorithmic skills. I thrive in <span className="text-terminal-green">Agile environments</span>, believe in writing maintainable code, 
-                      and enjoy tackling challenges that drive real business value.
+                    
+                    <p className="text-sm sm:text-base text-terminal-textMuted leading-relaxed">
+                      Beyond work, I'm passionate about <span className="text-terminal-green">competitive programming</span> with 
+                      <span className="font-semibold"> 278+ LeetCode problems</span> solved and a 
+                      <span className="font-semibold"> 6-star HackerRank rating</span>. 
+                      I believe in writing clean, maintainable code and continuously learning new technologies to solve complex problems.
                     </p>
-                    <p className="text-terminal-textMuted leading-relaxed">
-                      When I'm not coding, you'll find me exploring new technologies, participating in competitive programming on platforms like CodeChef and LeetCode, 
-                      or contributing to technical solutions that make a difference. I'm always eager to learn, grow, and take on new challenges in software engineering.
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 pt-4 mt-4 border-t border-terminal-border">
-                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center hover:border-terminal-cyan transition-colors cursor-pointer group">
-                    <div className="text-xl sm:text-2xl font-bold text-terminal-cyan group-hover:scale-110 transition-transform">4+</div>
-                    <div className="text-xs sm:text-sm text-terminal-textMuted mt-1">Years Experience</div>
-                  </div>
-                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center hover:border-terminal-green transition-colors cursor-pointer group">
-                    <div className="text-xl sm:text-2xl font-bold text-terminal-green group-hover:scale-110 transition-transform">278+</div>
-                    <div className="text-xs sm:text-sm text-terminal-textMuted mt-1">LeetCode Solved</div>
-                  </div>
-                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center hover:border-terminal-command transition-colors cursor-pointer group">
-                    <div className="text-lg sm:text-2xl font-bold text-terminal-command group-hover:scale-110 transition-transform">★★★★★★</div>
-                    <div className="text-xs sm:text-sm text-terminal-textMuted mt-1">HackerRank Rating</div>
-                  </div>
-                  <div className="bg-terminal-bg border border-terminal-border rounded p-3 text-center hover:border-terminal-cyan transition-colors cursor-pointer group">
-                    <div className="text-xl sm:text-2xl font-bold text-terminal-cyan group-hover:scale-110 transition-transform">∞</div>
-                    <div className="text-xs sm:text-sm text-terminal-textMuted mt-1">Learning</div>
+                    
+                    {/* Quick Stats */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 pt-4">
+                      <div className="bg-terminal-bg border border-terminal-border rounded p-2 sm:p-3 text-center hover:border-terminal-cyan transition-colors">
+                        <div className="text-lg sm:text-2xl font-bold text-terminal-cyan">4+</div>
+                        <div className="text-xs text-terminal-textMuted mt-1">Years Exp</div>
+                      </div>
+                      <div className="bg-terminal-bg border border-terminal-border rounded p-2 sm:p-3 text-center hover:border-terminal-green transition-colors">
+                        <div className="text-lg sm:text-2xl font-bold text-terminal-green">278+</div>
+                        <div className="text-xs text-terminal-textMuted mt-1">LeetCode</div>
+                      </div>
+                      <div className="bg-terminal-bg border border-terminal-border rounded p-2 sm:p-3 text-center hover:border-terminal-command transition-colors">
+                        <div className="text-lg sm:text-2xl font-bold text-terminal-command">6★</div>
+                        <div className="text-xs text-terminal-textMuted mt-1">HackerRank</div>
+                      </div>
+                      <div className="bg-terminal-bg border border-terminal-border rounded p-2 sm:p-3 text-center hover:border-terminal-cyan transition-colors">
+                        <div className="text-lg sm:text-2xl font-bold text-terminal-cyan">15+</div>
+                        <div className="text-xs text-terminal-textMuted mt-1">Tech Stack</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-
-          {/* Notable Projects Section */}
-          <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          {/* Dubai Project Highlight */}
+          <div className="terminal-card animate-slide-up bg-gradient-to-br from-terminal-bg via-terminal-bgLight to-terminal-bg border-terminal-cyan" style={{ animationDelay: '0.1s' }}>
             <div className="space-y-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-terminal-cyan flex items-center">
-                <span className="text-terminal-prompt mr-2">›</span>
-                Key Achievements
-              </h2>
-              <div className="pl-2 sm:pl-6 space-y-4 md:space-y-6">
-                {/* Dubai CEO Project */}
-                <div className="terminal-card bg-terminal-bg border-terminal-cyan">
-                  <div className="space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1">
-                        <h3 className="text-base sm:text-lg font-bold text-terminal-cyan mb-2 flex items-center gap-2">
-                          <span className="text-xl">🏆</span>
-                          CEO Experimental Project - Database Abstraction Prototype
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-terminal-textMuted mb-3">
-                          <span className="flex items-center gap-1">
-                            <span>📍</span>
-                            Dubai Office
-                          </span>
-                          <span className="text-terminal-border">•</span>
-                          <span className="flex items-center gap-1">
-                            <span>🏢</span>
-                            Suntec Business Solutions
-                          </span>
-                          <span className="text-terminal-border">•</span>
-                          <span className="flex items-center gap-1">
-                            <span className="w-2 h-2 bg-terminal-command rounded-full animate-pulse"></span>
-                            Experimental Prototype
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <h2 className="text-xl sm:text-2xl font-bold text-terminal-green flex items-center">
+                  <span className="text-terminal-prompt mr-2">›</span>
+                  Featured Project: Dubai Office Onsite Opportunity
+                </h2>
+                <span className="inline-flex items-center gap-2 px-3 py-1 bg-terminal-cyan/10 border border-terminal-cyan rounded text-terminal-cyan text-xs font-semibold">
+                  <span>🌟</span>
+                  Career Highlight
+                </span>
+              </div>
+              
+              <div className="pl-2 sm:pl-6 space-y-4">
+                <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
+                  Selected for onsite opportunity at Dubai office to work directly with CEO on experimental prototype for database-agnostic system for Suntec's 
+                  <span className="text-terminal-cyan font-semibold"> Revenue Management System</span>. Contributed to exploring solutions for multi-database compatibility 
+                  serving banking, hospitality, and financial institutions.
+                </p>
 
-                    <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
-                      Selected for onsite opportunity at Dubai office to work directly with CEO on experimental prototype for database-agnostic system for Suntec's 
-                      <span className="text-terminal-cyan font-semibold"> Revenue Management System</span>. Contributed to exploring solutions for multi-database compatibility 
-                      serving banking, hospitality, and financial institutions.
-                    </p>
-
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-2 sm:gap-3">
-                        <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
-                            <span className="font-semibold text-terminal-green">Implemented Redis-based caching layer</span> for the prototype, working on caching strategies 
-                            for frequently accessed data to reduce direct database queries and improve response times
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-2 sm:gap-3">
-                        <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
-                            <span className="font-semibold text-terminal-green">Collaborated with CEO</span> on experimental approach to enable the revenue management platform 
-                            to interface with multiple database systems (Oracle, PostgreSQL, SQL Server) without tight coupling
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-2 sm:gap-3">
-                        <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
-                            <span className="font-semibold text-terminal-green">Gained hands-on experience</span> with distributed caching patterns, cache invalidation strategies, 
-                            and performance optimization techniques for enterprise-scale applications
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-3 border-t border-terminal-border">
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-                        <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded">
-                          <div className="text-terminal-cyan font-bold text-sm sm:text-base">Redis</div>
-                          <div className="text-terminal-textMuted text-xs">Caching Layer</div>
-                        </div>
-                        <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded">
-                          <div className="text-terminal-green font-bold text-sm sm:text-base">CEO</div>
-                          <div className="text-terminal-textMuted text-xs">Direct Collab</div>
-                        </div>
-                        <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded">
-                          <div className="text-terminal-command font-bold text-sm sm:text-base">Dubai</div>
-                          <div className="text-terminal-textMuted text-xs">Onsite Project</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-terminal-bg border border-terminal-border rounded p-3 sm:p-4">
-                      <p className="text-terminal-textMuted text-xs sm:text-sm leading-relaxed">
-                        <span className="text-terminal-cyan font-semibold">Technologies:</span> Redis, Java, Spring Boot, 
-                        Caching Strategies, Cache Invalidation Patterns
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
+                        <span className="font-semibold text-terminal-green">Implemented Redis-based caching layer</span> for the prototype, working on caching strategies 
+                        for frequently accessed data to reduce direct database queries and improve response times
                       </p>
-                      <p className="text-terminal-textMuted text-xs mt-2 leading-relaxed">
-                        <span className="text-terminal-green font-semibold">Key Learning:</span> Valuable exposure to distributed caching design, 
-                        working directly with leadership on R&D initiatives, and understanding enterprise-scale architectural challenges
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
+                        <span className="font-semibold text-terminal-green">Collaborated with CEO</span> on experimental approach to enable the revenue management platform 
+                        to interface with multiple database systems (Oracle, PostgreSQL, SQL Server) without tight coupling
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 sm:gap-3">
+                    <span className="text-terminal-cyan mt-0.5 flex-shrink-0">▸</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-terminal-text text-sm sm:text-base leading-relaxed">
+                        <span className="font-semibold text-terminal-green">Gained hands-on experience</span> with distributed caching patterns, cache invalidation strategies, 
+                        and performance optimization techniques for enterprise-scale applications
                       </p>
                     </div>
                   </div>
                 </div>
+
+                <div className="pt-3 border-t border-terminal-border">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                    <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded hover:border-terminal-cyan transition-colors">
+                      <div className="text-terminal-cyan font-bold text-sm sm:text-base">Redis</div>
+                      <div className="text-terminal-textMuted text-xs">Caching Layer</div>
+                    </div>
+                    <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded hover:border-terminal-green transition-colors">
+                      <div className="text-terminal-green font-bold text-sm sm:text-base">CEO</div>
+                      <div className="text-terminal-textMuted text-xs">Direct Collab</div>
+                    </div>
+                    <div className="text-center p-2 bg-terminal-bg border border-terminal-border rounded hover:border-terminal-command transition-colors">
+                      <div className="text-terminal-command font-bold text-sm sm:text-base">Dubai</div>
+                      <div className="text-terminal-textMuted text-xs">Onsite Project</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-terminal-bg border border-terminal-border rounded p-3 sm:p-4">
+                  <p className="text-terminal-textMuted text-xs sm:text-sm leading-relaxed">
+                    <span className="text-terminal-cyan font-semibold">Technologies:</span> Redis, Java, Spring Boot, 
+                    Caching Strategies, Cache Invalidation Patterns
+                  </p>
+                  <p className="text-terminal-textMuted text-xs mt-2 leading-relaxed">
+                    <span className="text-terminal-green font-semibold">Key Learning:</span> Valuable exposure to distributed caching design, 
+                    working directly with leadership on R&D initiatives, and understanding enterprise-scale architectural challenges
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+
           {/* Skills Section */}
           <div className="terminal-card animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="space-y-4">
