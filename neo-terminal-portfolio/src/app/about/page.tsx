@@ -196,30 +196,38 @@ export default function AboutPage() {
                   <div className="lg:col-span-2 space-y-4 text-terminal-text">
                     <p className="text-base sm:text-lg leading-relaxed">
                       Hello! I'm <span className="text-terminal-cyan font-semibold">Sushant Kumar</span>, 
-                      a <span className="text-terminal-green font-semibold">Software Engineer II at Equifax</span> with 4.5+ years of experience 
-                      specializing in <span className="text-terminal-cyan">enterprise-scale backend development</span> and 
-                      <span className="text-terminal-cyan"> modern web applications</span>.
-                    </p>
-                    
-                    <p className="text-sm sm:text-base leading-relaxed">
-                      Currently at <span className="font-semibold text-terminal-green">Equifax</span>, I work on <span className="text-terminal-cyan">microservices architecture</span>, 
-                      building scalable systems using <span className="font-semibold">Java, Spring Boot, Apache Kafka, and Google Cloud Platform</span>. 
-                      My expertise spans authentication systems (<span className="text-terminal-cyan">OAuth2, SAML</span>), 
-                      distributed data pipelines, and cloud-native applications.
+                      a <span className="text-terminal-green font-semibold">Software Engineer II at Equifax</span> with 4.5+ years of professional experience 
+                      specializing in <span className="text-terminal-cyan">enterprise Java development</span>, 
+                      <span className="text-terminal-cyan">microservices architecture</span>, and 
+                      <span className="text-terminal-cyan">full-stack engineering</span>.
                     </p>
 
                     <p className="text-sm sm:text-base leading-relaxed">
-                      Previously, I worked at <span className="font-semibold text-terminal-green">Suntec Business Solutions</span>, 
-                      contributing to the <span className="text-terminal-cyan">Xelerate platform</span> — an enterprise revenue management system 
-                      serving major banks and financial institutions globally. I developed RESTful APIs, implemented caching strategies with Redis, 
-                      and built responsive frontends using Angular.
+                      Currently at <span className="font-semibold text-terminal-green">Equifax</span>, I design and develop{' '}
+                      <span className="text-terminal-cyan">cloud-native microservices</span> and web applications using{' '}
+                      <span className="font-semibold">Java, Spring Boot, Angular, and Google Cloud Platform</span>. 
+                      I build scalable backend systems with distributed architectures while delivering modern, responsive user interfaces. 
+                      My technical expertise includes <span className="text-terminal-cyan">OAuth2/SAML authentication</span>, 
+                      RESTful API development, containerization with <span className="font-semibold">Docker</span>, and implementing{' '}
+                      <span className="text-terminal-cyan">CI/CD pipelines</span> using Jenkins for automated deployment workflows.
                     </p>
-                    
+
+                    <p className="text-sm sm:text-base leading-relaxed">
+                      Previously at <span className="font-semibold text-terminal-green">Suntec Business Solutions</span>, 
+                      I served as a Backend Java Developer on the <span className="text-terminal-cyan">Xelerate revenue management platform</span> — 
+                      a mission-critical enterprise system deployed at major banks and financial institutions worldwide. 
+                      I engineered high-performance <span className="text-terminal-cyan">RESTful APIs</span> using{' '}
+                      <span className="font-semibold">Java and Spring Boot</span>, architected event-driven data pipelines with{' '}
+                      <span className="font-semibold">Apache Kafka</span>, and implemented{' '}
+                      <span className="text-terminal-cyan">Redis caching solutions</span> that significantly improved system performance and scalability.
+                    </p>
+
                     <p className="text-sm sm:text-base text-terminal-textMuted leading-relaxed">
-                      Beyond work, I'm passionate about <span className="text-terminal-green">competitive programming</span> with 
-                      <span className="font-semibold"> 278+ LeetCode problems</span> solved and a 
-                      <span className="font-semibold"> 6-star HackerRank rating</span>. 
-                      I believe in writing clean, maintainable code and continuously learning new technologies to solve complex problems.
+                      I'm passionate about <span className="text-terminal-green">software craftsmanship and problem-solving</span>, with{' '}
+                      <span className="font-semibold">278+ LeetCode problems</span> solved and a{' '}
+                      <span className="font-semibold">6-star rating on HackerRank</span>. 
+                      I continuously enhance my skills in <span className="text-terminal-cyan">system design</span>, 
+                      cloud computing, and modern development practices to build robust, maintainable solutions that solve complex business problems.
                     </p>
                     
                     {/* Quick Stats */}
