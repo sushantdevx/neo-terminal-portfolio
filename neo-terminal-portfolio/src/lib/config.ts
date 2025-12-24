@@ -1,16 +1,16 @@
 import { SiteConfig, NavItem } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME || "SK9712 Portfolio",
+  name: process.env.NEXT_PUBLIC_SITE_NAME || "sushantk.dev Portfolio",
   description: "Developer-focused portfolio with terminal aesthetics",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   author: {
     name: "Sushant Kumar",
-    email: "sushantdevx@gmail.com",
-    github: "https://github.com/sushantdevx",
-    linkedin: "https://www.linkedin.com/in/sushantdevx",
-    twitter: "https://x.com/sushantdevx",
-    medium: "https://medium.com/@sushantdevx",
+    email: "sushantk.connect@gmail.com",
+    github: "https://github.com/sushantk-dev",
+    linkedin: "https://www.linkedin.com/in/sushantk-dev",
+    twitter: "https://x.com/sushantk_tech",
+    medium: "https://medium.com/@sushantk.dev",
     hackerrank: "https://www.hackerrank.com/profile/lOne9wOlf",
     leetcode: "https://leetcode.com/u/sushantdevx/"
   },
